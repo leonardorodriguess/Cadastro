@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "materialui"
-    ]
+    ],
+    "editor.suggest.showStructs": true
 }
