@@ -1,6 +1,7 @@
-import { Avatar, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
+import { Avatar, Divider, Drawer, List,  useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDrawerContext } from '../../contexts';
+import { ListItemLink } from './ListItemLink';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ export function MenuLateral({children} : Props){
   const theme = useTheme();
   const snDown = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
+  const { isDrawerOpen, toggleDrawerOpen, drawerOptions} = useDrawerContext();
 
   return(
     <>
@@ -39,12 +40,15 @@ export function MenuLateral({children} : Props){
 
           <Box flex={1}>
             <List component="nav">
-              <ListItemButton>
-                <ListItemIcon>
-                  <Icon>home</Icon>
-                </ListItemIcon>
-                <ListItemText primary="Página inicial" />
-              </ListItemButton>
+              {drawerOptions.map( drawerOption => (
+                <ListItemLink 
+                  key={drawerOption.path}
+                  icon={drawerOption.icon}
+                  label={drawerOption.label}
+                  to={drawerOption.path}
+                  onClick={snDown ? toggleDrawerOpen : undefined}
+                />
+              ))}
             </List>
           </Box>
 
