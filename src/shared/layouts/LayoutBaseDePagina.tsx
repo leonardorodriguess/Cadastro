@@ -5,11 +5,13 @@ import { useDrawerContext } from '../contexts';
 interface Props{
   children: React.ReactNode,
   titulo: string,
+  barraDeFerramentas?: React.ReactNode
 
 }
 
-export function LayoutBaseDePagina ( {children, titulo} : Props) {
+export function LayoutBaseDePagina ( {children, titulo, barraDeFerramentas} : Props) {
   const smDown = useMediaQuery((theme : Theme) => theme.breakpoints.down('sm'));
+  const mdDown = useMediaQuery((theme : Theme) => theme.breakpoints.down('md'));
   const theme = useTheme();
 
   const { toggleDrawerOpen } = useDrawerContext();
@@ -22,8 +24,8 @@ export function LayoutBaseDePagina ( {children, titulo} : Props) {
         padding= {1} 
         display="flex" 
         alignItems="center" 
-        height={theme. spacing(12)}
         gap={1}
+        height={theme. spacing(smDown ? 6 : mdDown ? 8: 12)}
       >
         {smDown && (
           <IconButton onClick={ toggleDrawerOpen }>
@@ -31,16 +33,23 @@ export function LayoutBaseDePagina ( {children, titulo} : Props) {
           </IconButton>
         )}
 
-        <Typography variant="h5">
+        <Typography 
+          overflow="hidden" //Quando o texto tiver muito grande faz com que suma
+          whiteSpace="nowrap" //Não quebra novas linhas
+          textOverflow="ellipses" // Aparece 3 pontinhos como continuação
+          variant={smDown ? 'h5' : mdDown ? 'h4' : 'h3'}
+        >
           {titulo}
         </Typography>
       </Box>
 
-      <Box>
-        Barra de ferramentas
-      </Box>
+      {barraDeFerramentas && (
+        <Box>
+          {barraDeFerramentas}
+        </Box>
+      )}
 
-      <Box>
+      <Box flex={1} overflow="auto">
         {children}
       </Box>
       
