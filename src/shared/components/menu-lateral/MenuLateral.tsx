@@ -1,6 +1,6 @@
-import { Avatar, Divider, Drawer, List,  useMediaQuery, useTheme } from '@mui/material';
+import { Avatar, Divider, Drawer, Icon, List,  ListItemButton,  ListItemIcon,  ListItemText,  useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import { useDrawerContext } from '../../contexts';
+import { useAppThemeContext, useDrawerContext } from '../../contexts';
 import { ListItemLink } from './ListItemLink';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 export function MenuLateral({children} : Props){
   const theme = useTheme();
   const snDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const { toggleTheme } = useAppThemeContext();
 
   const { isDrawerOpen, toggleDrawerOpen, drawerOptions} = useDrawerContext();
 
@@ -50,6 +51,14 @@ export function MenuLateral({children} : Props){
                 />
               ))}
             </List>
+          </Box>
+          <Box>
+            <ListItemButton onClick={toggleTheme}>
+              <ListItemIcon>
+                <Icon>dark_mode</Icon>
+              </ListItemIcon>
+              <ListItemText primary="Alternar tema" />
+            </ListItemButton>
           </Box>
 
         </Box>
