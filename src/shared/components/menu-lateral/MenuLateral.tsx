@@ -55,7 +55,7 @@ export function MenuLateral({children} : Props){
         </Box>
       </Drawer>
 
-      <Box height="100vh" marginLeft={snDown ? 0 : theme.spacing(28)}>
+      <Box height="100%" marginLeft={snDown ? 0 : theme.spacing(28)}>
         {children}
       </Box>
     </>

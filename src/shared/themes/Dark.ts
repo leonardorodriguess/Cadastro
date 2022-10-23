@@ -18,6 +18,11 @@ export const DarkTheme = createTheme({
     background: {
       default: '#202124',
       paper: '#303134',
+    },
+    text: {
+      primary : '#ffffff',
+      // secondary: '#ffffff',
+      disabled : '#000000',
     }
   }
 });
