@@ -3,6 +3,7 @@
     "editor.tabSize": 2,
     "editor.formatOnPaste": true,
     "cSpell.words": [
-        "Botao"
+        "Botao",
+        "materialui"
     ]
 }
