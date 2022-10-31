@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { IListagemPessoa, pessoasService } from '../../shared/services/api/pessoas/PessoasServices';
+import { IListagemPessoa, PessoasService } from '../../shared/services/api/pessoas/PessoasServices';
 import { FerramentasDaListagem } from '../../shared/components';
 import { useDebounce } from '../../shared/hooks/UseDebounce';
 import { LayoutBaseDePagina } from '../../shared/layouts';
@@ -11,6 +11,7 @@ import { Environment } from '../../shared/environment';
 export function ListagemDePessoas (){
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce(3000);
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState<IListagemPessoa[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +29,7 @@ export function ListagemDePessoas (){
     setIsLoading(true);
 
     debounce(() => {
-      pessoasService.getAll(pagina, busca)
+      PessoasService.getAll(pagina, busca)
       
         .then((result) => {
           setIsLoading(false);
@@ -45,6 +46,24 @@ export function ListagemDePessoas (){
 
     });
   }, [busca, pagina]);
+
+  const handleDelete = (id: number) => {
+
+    if (confirm('Realmente deseja apagar?')){
+      PessoasService.deleteById(id)
+        .then(result => {
+          if (result instanceof Error){
+            alert(result.message);
+          }else{
+            setRows(oldRows => [
+              ...oldRows.filter(oldRow => oldRow.id !== id),
+            ]);
+            alert('Registro apagado com sucesso!');
+          }
+        });
+    }
+
+  };
 
   return (
     <LayoutBaseDePagina 
@@ -74,7 +93,16 @@ export function ListagemDePessoas (){
           <TableBody>
             {rows.map(row => (
               <TableRow key={row.id}>
-                <TableCell>Ações</TableCell>
+
+                <TableCell>
+                  <IconButton size="small" onClick={() => handleDelete(row.id)}>
+                    <Icon>delete</Icon>
+                  </IconButton>
+                  <IconButton size="small" onClick={() => navigate(`/pessoas/detalhe/${row.id}`)}>
+                    <Icon>edit</Icon>
+                  </IconButton>
+                </TableCell>
+
                 <TableCell>{row.nomeCompleto}</TableCell>
                 <TableCell>{row.email}</TableCell>
               </TableRow>
