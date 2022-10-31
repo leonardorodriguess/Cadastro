@@ -54,7 +54,9 @@ export function ListagemDePessoas (){
           mostrarInputBusca 
           textoBotaoNovo='Nova'
           textoDaBusca={searchParams.get('busca') ?? ''}
-          aoMudarTextoDeBusca={texto => setSearchParams({busca : texto, pagina : '1' }, { replace: true})}
+          aoMudarTextoDeBusca={texto => setSearchParams(
+            {busca : texto, pagina : '1' }, { replace: true}
+          )}
         />
       }
     >
