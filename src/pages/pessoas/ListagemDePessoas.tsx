@@ -73,6 +73,7 @@ export function ListagemDePessoas (){
           mostrarInputBusca 
           textoBotaoNovo='Nova'
           textoDaBusca={searchParams.get('busca') ?? ''}
+          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
           aoMudarTextoDeBusca={texto => setSearchParams(
             {busca : texto, pagina : '1' }, { replace: true}
           )}

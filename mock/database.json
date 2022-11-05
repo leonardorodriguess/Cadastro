@@ -1,7 +1,7 @@
 {
-  "pessoas" : [
+  "pessoas": [
     {
-      "id":1,
+      "id": 1,
       "email": "Leonardo@sadkfl.com",
       "cidadeId": 1,
       "nomeCompleto": "Leonardo Rodrigues"
@@ -86,18 +86,6 @@
     },
     {
       "id": 15,
-      "email": "Jonas@sadkfl.com",
-      "cidadeId": 2,
-      "nomeCompleto": "Jonas"
-    },
-    {
-      "id": 16,
-      "email": "Jonas@sadkfl.com",
-      "cidadeId": 2,
-      "nomeCompleto": "Jonas"
-    },
-    {
-      "id": 17,
       "email": "Jonas@sadkfl.com",
       "cidadeId": 2,
       "nomeCompleto": "Jonas"
