@@ -1,7 +1,7 @@
 import { Environment } from '../../../environment';
 import { Api } from '../axios-config';
 
-interface IListagemPessoa {
+export interface IListagemPessoa {
   id: number,
   email: string, 
   cidadeId: number,
@@ -29,13 +29,13 @@ const getAll = async (page = 1, filter = ''): Promise<TPessoasComTotalCont | Err
     if(data) {
       return {
         data,
-        totalCount: Number(headers['x-total-count']) || Environment.LIMITE_DE_LINHAS,
+        totalCount: Number(headers['x-total-count'] || Environment.LIMITE_DE_LINHAS),
       };
     }
     
     return new Error('Erro ao listar os registros.');
   } catch (error){
-    console.log(error);
+    console.error(error);
 
     return new Error((error as {message:string}).message || 'Erro ao listar os registros.');
   }
@@ -91,7 +91,7 @@ const deleteById = async (id : number): Promise<void | Error> => {
   }
 };
 
-export const pessoasService = {
+export const PessoasService = {
   getAll,
   create,
   getById,
