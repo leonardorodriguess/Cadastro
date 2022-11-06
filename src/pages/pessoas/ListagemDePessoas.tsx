@@ -37,7 +37,7 @@ export function ListagemDePessoas (){
           if(result instanceof Error){
             alert(result.message);
           } else {
-            console.log(result);
+            // console.log(result);
             setTotalCont(result.totalCount);
             setRows(result.data);
           

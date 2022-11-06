@@ -7,25 +7,7 @@
       "nomeCompleto": "Leonardo Rodrigues"
     },
     {
-      "id": 2,
-      "email": "Jubileuo@sadkfl.com",
-      "cidadeId": 2,
-      "nomeCompleto": "Jubileus"
-    },
-    {
-      "id": 3,
-      "email": "Jonas@sadkfl.com",
-      "cidadeId": 2,
-      "nomeCompleto": "Jonas"
-    },
-    {
       "id": 4,
-      "email": "Jonas@sadkfl.com",
-      "cidadeId": 2,
-      "nomeCompleto": "Jonas"
-    },
-    {
-      "id": 5,
       "email": "Jonas@sadkfl.com",
       "cidadeId": 2,
       "nomeCompleto": "Jonas"
