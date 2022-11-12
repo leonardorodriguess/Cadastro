@@ -29,8 +29,8 @@ export function VTextField ({name, ...rest } : TVTextFieldProps) {
 
       value = {value}
       
-      onChange = {e => setValue(e.target.value)}
-      onKeyDown={() => error ? clearError() : undefined}
+      onChange = {e => {setValue(e.target.value); rest.onChange?.(e);}}
+      onKeyDown={(e) => {error && clearError(); rest.onKeyDown?.(e);}}
     />
   );
 }
