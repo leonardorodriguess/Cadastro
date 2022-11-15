@@ -1,0 +1,1 @@
+export { Form as VScope } from '@unform/web';
