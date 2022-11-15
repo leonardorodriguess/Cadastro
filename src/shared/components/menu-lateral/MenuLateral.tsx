@@ -46,7 +46,8 @@ export function MenuLateral({children} : Props){
                   key={drawerOption.path}
                   icon={drawerOption.icon}
                   label={drawerOption.label}
-                  to={drawerOption.path}
+                  path={drawerOption.path}
+                  filhos={drawerOption.filhos}
                   onClick={snDown ? toggleDrawerOpen : undefined}
                 />
               ))}

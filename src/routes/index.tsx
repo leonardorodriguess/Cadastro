@@ -8,18 +8,27 @@ export function AppRoutes (): JSX.Element{
 
   //Garantir que passe somente uma vez
   useEffect(() => {
-    setDrawerOptions([
-      {
-        icon: 'home',
-        path: '/pagina-inicial',
-        label: 'Página Inicial'
-      },
-      {
-        icon: 'people',
-        path: '/pessoas',
-        label: 'Pessoas'
-      },
-    ]);
+    setDrawerOptions(
+      [
+        {
+          icon: 'home',
+          path: '/pagina-inicial',
+          label: 'Página',
+          filhos: [
+            {
+              icon: 'people',
+              path: '/pessoas',
+              label: 'Pessoas'
+            }
+          ]
+        }, 
+        {
+          icon: 'people',
+          path: '/pessoas',
+          label: 'Pessoas'
+        }
+      ], 
+    );
   }, []);
   
   return (
