@@ -18,7 +18,7 @@ interface IAppThemeProviderProps{
 }
 
 export function AppThemeProvider ({ children } : IAppThemeProviderProps) {
-  const [themeName, setThemeName] = useState<'dark' | 'ligth'>('ligth');
+  const [themeName, setThemeName] = useState<'dark' | 'ligth'>('dark');
 
   const toggleTheme = useCallback(() => {
     setThemeName(oldThemeName => oldThemeName === 'ligth' ? 'dark' : 'ligth');

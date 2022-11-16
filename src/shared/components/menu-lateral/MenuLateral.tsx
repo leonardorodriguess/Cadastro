@@ -40,7 +40,7 @@ export function MenuLateral({children} : Props){
           <Divider/>
 
           <Box flex={1}>
-            <List component="nav">
+            <List component="nav" disablePadding={true}>
               {drawerOptions.map( drawerOption => (
                 <ListItemLink 
                   key={drawerOption.path}
