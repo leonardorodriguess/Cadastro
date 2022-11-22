@@ -2,18 +2,18 @@ import { useEffect, useMemo, useState } from 'react';
 import { Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { IListagemPessoa, PessoasService } from '../../shared/services/api/pessoas/PessoasServices';
+import { IListagemCidade, CidadesService } from '../../shared/services/api/cidades/CidadesServices';
 import { FerramentasDaListagem } from '../../shared/components';
 import { useDebounce } from '../../shared/hooks/UseDebounce';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { Environment } from '../../shared/environment';
 
-export function ListagemDePessoas (){
+export function ListagemDeCidades (){
   const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce(3000);
   const navigate = useNavigate();
 
-  const [rows, setRows] = useState<IListagemPessoa[]>([]);
+  const [rows, setRows] = useState<IListagemCidade[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalCount, setTotalCont] = useState(0);
 
@@ -29,7 +29,7 @@ export function ListagemDePessoas (){
     setIsLoading(true);
 
     debounce(() => {
-      PessoasService.getAll(pagina, busca)
+      CidadesService.getAll(pagina, busca)
       
         .then((result) => {
           setIsLoading(false);
@@ -50,7 +50,7 @@ export function ListagemDePessoas (){
   const handleDelete = (id: number) => {
 
     if (confirm('Realmente deseja apagar?')){
-      PessoasService.deleteById(id)
+      CidadesService.deleteById(id)
         .then(result => {
           if (result instanceof Error){
             alert(result.message);
@@ -67,13 +67,13 @@ export function ListagemDePessoas (){
 
   return (
     <LayoutBaseDePagina 
-      titulo='Listagem de pessoas'
+      titulo='Listagem de cidades'
       barraDeFerramentas = {
         <FerramentasDaListagem
           mostrarInputBusca 
           textoBotaoNovo='Nova'
           textoDaBusca={searchParams.get('busca') ?? ''}
-          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
+          aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
           aoMudarTextoDeBusca={texto => setSearchParams(
             {busca : texto, pagina : '1' }, { replace: true}
           )}
@@ -86,8 +86,7 @@ export function ListagemDePessoas (){
 
             <TableRow>
               <TableCell>Ações</TableCell>
-              <TableCell>Nome Completo</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>Nome</TableCell>
             </TableRow>
             
           </TableHead>
@@ -99,13 +98,12 @@ export function ListagemDePessoas (){
                   <IconButton size="small" onClick={() => handleDelete(row.id)}>
                     <Icon>delete</Icon>
                   </IconButton>
-                  <IconButton size="small" onClick={() => navigate(`/pessoas/detalhe/${row.id}`)}>
+                  <IconButton size="small" onClick={() => navigate(`/cidades/detalhe/${row.id}`)}>
                     <Icon>edit</Icon>
                   </IconButton>
                 </TableCell>
 
-                <TableCell>{row.nomeCompleto}</TableCell>
-                <TableCell>{row.email}</TableCell>
+                <TableCell>{row.nome}</TableCell>
               </TableRow>
             ))}
           </TableBody>

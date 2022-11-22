@@ -6,21 +6,17 @@ import * as yup from 'yup';
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { VTextField, VForm, useVForm, IVFormErros} from '../../shared/forms';
 import { LayoutBaseDePagina } from '../../shared/layouts';
-import { PessoasService } from '../../shared/services/api/pessoas/PessoasServices';
+import { CidadesService } from '../../shared/services/api/cidades/CidadesServices';
 
 interface IFormData{
-  email: string;
-  nomeCompleto: string;
-  cidadeId: number;
+  nome: string;
 }
 
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
-  nomeCompleto: yup.string().required().min(3),
-  email: yup.string().required().email(),
-  cidadeId: yup.number().required()
+  nome: yup.string().required().min(3),
 });
 
-export function DetalheDePessoas (){
+export function DetalheDeCidades (){
   const { id = 'nova'} = useParams<'id'>();
   const navigate = useNavigate();
 
@@ -40,15 +36,15 @@ export function DetalheDePessoas (){
     if(id !== 'nova'){
       setIsLoading(true);
 
-      PessoasService.getById(Number(id))
+      CidadesService.getById(Number(id))
         .then((result) => {
           setIsLoading(false);
 
           if(result instanceof Error) {
             alert(result.message);
-            navigate('/pessoas');
+            navigate('/cidades');
           } else {
-            setNome(result.nomeCompleto);
+            setNome(result.nome);
             console.log(result);
 
             formRef.current?.setData(result);
@@ -71,7 +67,7 @@ export function DetalheDePessoas (){
       
         setIsLoading(true);
         if(id === 'nova') {
-          PessoasService
+          CidadesService
             .create(dadosValidados)
             .then((result) => {
               setIsLoading(false);
@@ -81,16 +77,16 @@ export function DetalheDePessoas (){
               }
               else{
                 if (isSaveAndClose()){
-                  navigate('/pessoas');
+                  navigate('/cidades');
                 }else{
-                  navigate(`/pessoas/detalhe/${result}`);
+                  navigate(`/cidades/detalhe/${result}`);
                 }
               }
             });
         }else{
           setIsLoading(true);
     
-          PessoasService
+          CidadesService
             .updateById(Number(id),{id: Number(id), ...dadosValidados})
             .then((result) => {
               setIsLoading(false);
@@ -99,7 +95,7 @@ export function DetalheDePessoas (){
                 alert(result.message);
               } else{
                 if (isSaveAndClose()){
-                  navigate('/pessoas');
+                  navigate('/cidades');
                 }
               }
             });
@@ -128,13 +124,13 @@ export function DetalheDePessoas (){
 
   const handleDelete = ( id : number) => {
     if(confirm('Realmente deseja apagar?')) {
-      PessoasService.deleteById(id)
+      CidadesService.deleteById(id)
         .then(result => {
           if (result instanceof Error) {
             alert(result.message);
           } else {
             alert('Registro apagado com sucesso');
-            navigate('/pessoas');
+            navigate('/cidades');
           }
 
         });
@@ -144,7 +140,7 @@ export function DetalheDePessoas (){
 
   return(
     <LayoutBaseDePagina 
-      titulo= {id !== 'nova' ? nome : 'Detalhe de pessoa'}
+      titulo= {id !== 'nova' ? nome : 'Detalhe de cidade'}
       barraDeFerramentas = {
         <FerramentasDeDetalhe 
           textoBotaoNovo='Nova'
@@ -155,8 +151,8 @@ export function DetalheDePessoas (){
           aoClicarEmSalvar={save}
           aoClicarEmSalvarEFechar={saveAndClose}
           aoClicarEmApagar={() => handleDelete(Number(id))}
-          aoClicarEmVoltar={() => navigate('/pessoas')}
-          aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
+          aoClicarEmVoltar={() => navigate('/cidades')}
+          aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
         />
       }
     >
@@ -186,47 +182,14 @@ export function DetalheDePessoas (){
                 <VTextField 
                   fullWidth 
                   label='Nome' 
-                  name='nomeCompleto' 
+                  name='nome' 
                   disabled={isLoading} 
                   onChange={e => setNome(e.target.value)}
                 />
               </Grid>
             </Grid>
-
-            <Grid container item direction="row" spacing={2}>
-              <Grid item xs={12} sm={12} md={8} lg={6} xl={4}>
-                <VTextField 
-                  fullWidth 
-                  label='Email' 
-                  name='email' 
-                  disabled={isLoading}
-                />
-              </Grid>
-            </Grid>
-            
-            <Grid container item direction="row" spacing={2}>
-              <Grid item xs={12} sm={12} md={8} lg={6} xl={4}>
-                <VTextField 
-                  fullWidth 
-                  label='Cidade' 
-                  name='cidadeId' 
-                  disabled={isLoading}
-                />
-              </Grid>
-            </Grid>
-
           </Grid>
         </Box>
-        
-        {/* {[1, 2, 3, 4].map((_,index) =>(
-          <Scope key="" path={`endereco[${index}]`}>
-            <VTextField name='rua' />
-            <VTextField name='numero' />
-            <VTextField name='estado' />
-            <VTextField name='cidade' />
-            <VTextField name='pais' />
-          </Scope>
-        ))} */}
 
       </VForm>
 
