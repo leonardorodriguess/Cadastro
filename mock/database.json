@@ -84,5 +84,15 @@
       "email": "2343",
       "cidadeId": "1"
     }
+  ],
+  "cidades": [
+    {
+      "id": 1,
+      "nome": "Sobral"
+    },
+    {
+      "nome": "Ubajara",
+      "id": 2
+    }
   ]
 }
