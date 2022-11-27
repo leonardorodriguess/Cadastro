@@ -83,6 +83,12 @@
       "nomeCompleto": "vermelho rosa",
       "email": "2343",
       "cidadeId": "1"
+    },
+    {
+      "id": 18,
+      "nomeCompleto": "cxvxzv",
+      "email": "asdf@gmail.com",
+      "cidadeId": 6
     }
   ],
   "cidades": [
@@ -93,6 +99,22 @@
     {
       "nome": "Ubajara",
       "id": 2
+    },
+    {
+      "nome": "Tiangua",
+      "id": 3
+    },
+    {
+      "nome": "João Pessoa",
+      "id": 4
+    },
+    {
+      "nome": "Rio de Janeiro",
+      "id": 5
+    },
+    {
+      "nome": "São Paulo",
+      "id": 6
     }
   ]
 }
