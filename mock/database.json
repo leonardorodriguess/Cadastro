@@ -116,5 +116,8 @@
       "nome": "São Paulo",
       "id": 6
     }
-  ]
+  ],
+  "auth": {
+    "acessToken" : "aaaaaaaaa.bbbbbbbbbb.ccccccccc"
+  }
 }
