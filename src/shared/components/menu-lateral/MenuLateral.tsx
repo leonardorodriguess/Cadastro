@@ -1,6 +1,6 @@
 import { Avatar, Divider, Drawer, Icon, List,  ListItemButton,  ListItemIcon,  ListItemText,  useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
-import { useAppThemeContext, useDrawerContext } from '../../contexts';
+import { useAppThemeContext, useAuthContext, useDrawerContext } from '../../contexts';
 import { ListItemLink } from './ListItemLink';
 
 interface Props {
@@ -10,9 +10,11 @@ interface Props {
 export function MenuLateral({children} : Props){
   const theme = useTheme();
   const snDown = useMediaQuery(theme.breakpoints.down('sm'));
-  const { toggleTheme } = useAppThemeContext();
-
+  
   const { isDrawerOpen, toggleDrawerOpen, drawerOptions} = useDrawerContext();
+  const { toggleTheme } = useAppThemeContext();
+  const { logout } = useAuthContext();
+  
 
   return(
     <>
@@ -53,12 +55,21 @@ export function MenuLateral({children} : Props){
             </List>
           </Box>
           <Box>
+
             <ListItemButton onClick={toggleTheme}>
               <ListItemIcon>
                 <Icon>dark_mode</Icon>
               </ListItemIcon>
               <ListItemText primary="Alternar tema" />
             </ListItemButton>
+
+            <ListItemButton onClick={logout}>
+              <ListItemIcon>
+                <Icon>logout</Icon>
+              </ListItemIcon>
+              <ListItemText primary="Sair" />
+            </ListItemButton>
+
           </Box>
 
         </Box>
