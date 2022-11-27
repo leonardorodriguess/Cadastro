@@ -52,9 +52,7 @@ export function DetalheDeCidades (){
         });
     } else { 
       formRef.current?.setData({
-        email: '',
-        cidadeId: '',
-        nomeCompleto: '',
+        nome: '',
       });
     }
   },[id]);
