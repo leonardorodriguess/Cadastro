@@ -89,6 +89,12 @@
       "nomeCompleto": "cxvxzv",
       "email": "asdf@gmail.com",
       "cidadeId": 6
+    },
+    {
+      "nomeCompleto": "leonardo",
+      "email": "leorodrigueslr377@gmail.com",
+      "cidadeId": 1,
+      "id": 19
     }
   ],
   "cidades": [
@@ -118,6 +124,6 @@
     }
   ],
   "auth": {
-    "acessToken" : "aaaaaaaaa.bbbbbbbbbb.ccccccccc"
+    "acessToken": "aaaaaaaaa.bbbbbbbbbb.ccccccccc"
   }
 }

@@ -83,8 +83,8 @@ export function Login ({children} : ILoginProps){
           </Box>
           
         </CardContent>
-        <CardActions>
-          <Box width='100%' display='flex' justifyContent='center'>
+        <CardActions >
+          <Box width='100%' display='flex' justifyContent='center' marginBottom={2}>
             <Button
               variant='contained'
               endIcon={
