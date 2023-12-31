@@ -161,7 +161,7 @@ export function DetalheDePessoas (){
         />
       }
     >
-      <VForm ref={formRef} onSubmit={(dados) => handleSave(dados)}>
+      <VForm placeholder={''} ref={formRef} onSubmit={(dados) => handleSave(dados)}>
 
         <Box 
           margin={1} 
